@@ -13,12 +13,13 @@ var etherUnits = require(__lib + "etherUnits.js")
 var getLatestBlocks = require('./index').getLatestBlocks;
 var filterBlocks = require('./filters').filterBlocks;
 var filterTrace = require('./filters').filterTrace;
-
+var RPC_HOST = process.env.RPC_HOST || "localhost"
+var RPC_PORT = process.env.RPC_PORT || 8545
 
 if (typeof web3 !== "undefined") {
   web3 = new Web3(web3.currentProvider);
 } else {
-  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+  web3 = new Web3(new Web3.providers.HttpProvider("http://"+RPC_HOST+":"+RPC_PORT));
 }
 
 if (web3.isConnected()) 
