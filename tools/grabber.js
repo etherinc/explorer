@@ -10,8 +10,10 @@ var mongoose = require( 'mongoose' );
 var Block     = mongoose.model( 'Block' );
 var Transaction     = mongoose.model( 'Transaction' );
 
+var RPC_HOST = process.env.RPC_HOST || "localhost"
+
 var grabBlocks = function(config) {
-    var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:' + 
+    var web3 = new Web3(new Web3.providers.HttpProvider('http://'+RPC_HOST+':' + 
         config.gethPort.toString()));
 
 
@@ -194,7 +196,7 @@ var writeTransactionsToDB = function(config, blockData) {
   Patch Missing Blocks
 */
 var patchBlocks = function(config) {
-    var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:' + 
+    var web3 = new Web3(new Web3.providers.HttpProvider('http://'+RPC_HOST+':' + 
         config.gethPort.toString()));
 
     // number of blocks should equal difference in block numbers
