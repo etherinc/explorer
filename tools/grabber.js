@@ -20,12 +20,12 @@ var grabBlocks = function(config) {
         listenBlocks(config, web3);
     else
         var query = Block.find().sort({number:1}).limit(1);
-        query.exec(function (err, LastblockNo) { 
+        query.exec(function (err, lastblock) { 
             if(err) {
                 console.log('Error: ' + err);
             } else {
                 var blockNo = config.blocks.pop();
-                if(dt[0].number){ blockNo = dt[0].number; }
+                if(lastblock[0].number){ blockNo = lastblock[0].number; }
 
                 setTimeout(function() {
                     grabBlock(config, web3, blockNo);
