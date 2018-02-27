@@ -15,14 +15,23 @@ var RPC_HOST = process.env.RPC_HOST || "localhost"
 var grabBlocks = function(config) {
     var web3 = new Web3(new Web3.providers.HttpProvider('http://'+RPC_HOST+':' + 
         config.gethPort.toString()));
-
-
+    
     if('listenOnly' in config && config.listenOnly === true) 
         listenBlocks(config, web3);
     else
-        setTimeout(function() {
-            grabBlock(config, web3, config.blocks.pop());
-        }, 2000);
+        var query = Block.find().sort({number:1}).limit(1);
+        query.exec(function (err, LastblockNo) { 
+            if(error) {
+                console.log('Error: ' + error);
+            } else {
+                var blockNo = config.blocks.pop();
+                if(dt[0].number){ blockNo = dt[0].number; }
+
+                setTimeout(function() {
+                    grabBlock(config, web3, blockNo);
+                }, 2000);
+            }
+        });
 
 }
 
@@ -98,7 +107,7 @@ var grabBlock = function(config, web3, blockHashOrNumber) {
                             (typeof blockHashOrNumber['start'] === 'number' && blockData['number'] > blockHashOrNumber['start'])
                         )
                     ) {
-                        blockHashOrNumber['end'] = blockData['number'] - 1;
+                        blockHashOrNumber['end'] = blockData['number'] + 1;
                         grabBlock(config, web3, blockHashOrNumber);
                     }
                     else {
