@@ -21,8 +21,8 @@ var grabBlocks = function(config) {
     else
         var query = Block.find().sort({number:1}).limit(1);
         query.exec(function (err, LastblockNo) { 
-            if(error) {
-                console.log('Error: ' + error);
+            if(err) {
+                console.log('Error: ' + err);
             } else {
                 var blockNo = config.blocks.pop();
                 if(dt[0].number){ blockNo = dt[0].number; }
