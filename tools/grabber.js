@@ -81,13 +81,14 @@ var grabBlock = function(web3, blockNumber) {
                     // then grab the parent block number (<this block's number> - 1). Otherwise done 
                     // with this interval object (or not currently working on an interval) 
                     // -> so move onto the next thing in the blocks array.
-                    if(blockData['number'] > blockHashOrNumber['start']) {
-                        blockNumber = blockData['number'] + 1;
-                        grabBlock(web3, blockNumber);
-                    }
-                    else {
-                        grabBlock(web3, blockNumber);
-                    }
+//                     if(blockData['number'] > blockNumber) {
+//                         blockNumber = blockData['number'] + 1;
+//                         grabBlock(web3, blockNumber);
+//                     }
+//                     else {
+//                         grabBlock(web3, blockNumber);
+//                     }
+                    grabBlock(web3, blockData['number'] + 1);
                 }
                 else {
                     console.log('Error: No hash or number was found for block: ' + blockHashOrNumber);
@@ -237,7 +238,7 @@ query.exec(function (err, lastblock) {
         if(lastblock[0].number){ 
             grabBlocks(lastblock[0].number + 1);
         } else {
-            grabBlocks(0);
+            grabBlocks(startBlock);
         }
     }
 });
