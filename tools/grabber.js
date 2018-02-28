@@ -237,7 +237,7 @@ query.exec(function (err, lastblock) {
         if(lastblock[0].number){ 
             grabBlocks(lastblock[0].number + 1);
         } else {
-            grabBlocks(startBlockno);
+            grabBlocks(0);
         }
     }
 });
