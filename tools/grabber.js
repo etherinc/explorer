@@ -230,12 +230,12 @@ if ((typeof gethPort) !== 'number') {
     gethPort = 8545; // default
 }
 
-var query = Block.find().sort({number:1}).limit(1);
+var query = Block.find().sort({number:-1}).limit(1);
 query.exec(function (err, lastblock) { 
     if(err) {
         console.log('Error: ' + err);
     } else {
-        if(lastblock[0].number){ 
+        if(lastblock.length && lastblock[0].number){ 
             grabBlocks(lastblock[0].number + 1);
         } else {
             grabBlocks(startBlock);
