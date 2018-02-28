@@ -252,8 +252,9 @@ try {
             console.log('Error: ' + err);
         } else {
             
-            config.blocks = [ {"start": lastblock[0].number} ];
-            if(lastblock[0].number){ blockNo = lastblock[0].number; }
+            if(lastblock[0].number){ 
+                config.blocks = [ {"start": lastblock[0].number} ];
+            }
         }
     });
 }
@@ -286,9 +287,9 @@ if (!('blocks' in config) || !(Array.isArray(config.blocks))) {
         if(err) {
             console.log('Error: ' + err);
         } else {
-            
-            config.blocks = [ {"start": lastblock[0].number} ];
-            if(lastblock[0].number){ blockNo = lastblock[0].number; }
+            if(lastblock[0].number){ 
+                config.blocks = [ {"start": lastblock[0].number} ];
+            }
         }
     });
 }
