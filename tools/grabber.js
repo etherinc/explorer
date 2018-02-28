@@ -61,7 +61,10 @@ var grabBlock = function(web3, blockNumber) {
             }
             else if(blockData == null) {
                 console.log('Warning: null block data received from the block with hash/number: ' +
-                    desiredBlockNumber);
+                    desiredBlockNumber + ' | Retrying in 2 Seconds');
+                setTimeout(function() {
+                    grabBlock(web3, desiredBlockNumber);
+                }, 2000);
             }
             else {
                 if(terminateAtExistingDB === true) {
