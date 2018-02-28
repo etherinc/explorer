@@ -47,7 +47,7 @@ angular.module('BlocksApp').controller('HomeController', function($rootScope, $s
       scope.stats = {};
 
       var etcEthURL = "/stats";
-      var etcPriceURL = "https://api.coinmarketcap.com/v1/ticker/ethereum-classic/";
+      var etiPriceURL = "https://api.einc.io/price/";
       var ethPriceURL = "https://api.coinmarketcap.com/v1/ticker/ethereum/"
       scope.stats.ethDiff = 1;
       scope.stats.ethHashrate = 1;
@@ -64,9 +64,9 @@ angular.module('BlocksApp').controller('HomeController', function($rootScope, $s
           scope.stats.etcDiff = res.data.etcDiff;
           scope.stats.etcEthDiff = res.data.etcEthDiff;
         });
-      $http.get(etcPriceURL)
+      $http.get(etiPriceURL)
        .then(function(res){
-          scope.stats.usdEtc = parseFloat(res.data[0]["price_usd"]);
+          scope.stats.usdEtc = parseFloat(res.data["price_usd"]);
           scope.stats.usdEtcEth = parseInt(100*scope.stats.usdEtc/scope.stats.usdEth);
         });
       $http.get(ethPriceURL)
