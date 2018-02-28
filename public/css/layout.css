@@ -82,6 +82,7 @@
     display: block;
     width: 255px;
     height: 75px;
+    top: 25px;
     position: absolute;
 }
 
