@@ -20,7 +20,7 @@ var grabBlocks = function(config) {
         listenBlocks(config, web3);
     else
         setTimeout(function() {
-            grabBlock(config, web3, blockNo);
+            grabBlock(config, web3, config.blocks.pop());
         }, 2000);
 }
 
