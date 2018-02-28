@@ -253,7 +253,7 @@ try {
         } else {
             
             if(lastblock[0].number){ 
-                config.blocks = [ {"start": lastblock[0].number} ];
+                config.blocks = [ {"start": lastblock[0].number + 1} ];
             }
         }
     });
@@ -288,7 +288,7 @@ if (!('blocks' in config) || !(Array.isArray(config.blocks))) {
             console.log('Error: ' + err);
         } else {
             if(lastblock[0].number){ 
-                config.blocks = [ {"start": lastblock[0].number} ];
+                config.blocks = [ {"start": lastblock[0].number + 1} ];
             }
         }
     });
