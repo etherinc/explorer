@@ -5,7 +5,7 @@
                 <div class="number">
                     <h3 class="font-green-sharp">
                         <small class="font-green-sharp">$</small>
-                        <span data-counter="counterup" data-value="stats.usdEtc">{{stats.usdEti}}</span>
+                        <span data-counter="counterup" data-value="stats.usdEti">{{stats.usdEti}}</span>
                     </h3>
                     <small>ETI Price</small>
                 </div>
@@ -16,11 +16,11 @@
             <div class="progress-info">
                 <div class="progress">
                     <span style="width: {{stats.usdEtiEth}}%;" class="progress-bar progress-bar-success green-sharp">
-                        <span class="sr-only">{{stats.usdEtiEth}}% ETC/ETH USD price</span>
+                        <span class="sr-only">{{stats.usdEtiEth}}% ETI/ETH USD price</span>
                     </span>
                 </div>
                 <div class="status">
-                    <div class="status-title"> ETC/ETH USD Price </div>
+                    <div class="status-title"> ETI/ETH USD Price </div>
                     <div class="status-number"> {{stats.usdEtiEth}}% </div>
                 </div>
             </div>
@@ -31,20 +31,20 @@
             <div class="display">
                 <div class="number">
                     <h3 class="font-red-haze">
-                        <span data-counter="counterup" data-value="stats.etcHashrate">{{stats.etcHashrate | totalDifficulty}}/s</span>
+                        <span data-counter="counterup" data-value="stats.etcHashrate">{{stats.etiHashrate | totalDifficulty}}/s</span>
                     </h3>
                     <small>ETC Avg Hashrate</small>
                 </div>
             </div>
             <div class="progress-info">
                 <div class="progress">
-                    <span style="width: {{stats.etcEthHash}}%;" class="progress-bar progress-bar-success red-haze">
-                        <span class="sr-only">{{stats.etcEthHash}}% </span>
+                    <span style="width: {{stats.etiEthHash}}%;" class="progress-bar progress-bar-success red-haze">
+                        <span class="sr-only">{{stats.etiEthHash}}% </span>
                     </span>
                 </div>
                 <div class="status">
                     <div class="status-title"> ETI/ETH Hashrate </div>
-                    <div class="status-number"> {{stats.etcEthHash}}% </div>
+                    <div class="status-number"> {{stats.etiEthHash}}% </div>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
             <div class="display">
                 <div class="number">
                     <h3 class="font-blue-sharp">
-                        <span data-counter="counterup" data-value="{{stats.etcEthDiff}}">{{stats.etcDiff | totalDifficulty}}</span>
+                        <span data-counter="counterup" data-value="{{stats.etiEthDiff}}">{{stats.etiDiff | totalDifficulty}}</span>
                     </h3>
                     <small>DIFFICULTY</small>
                 </div>
@@ -64,13 +64,13 @@
             </div>
             <div class="progress-info">
                 <div class="progress">
-                    <span style="width: {{stats.etcEthDiff}}%;" class="progress-bar progress-bar-success blue-sharp">
-                        <span class="sr-only">{{stats.etcEthDiff}}% eti/eth difficulty</span>
+                    <span style="width: {{stats.etiEthDiff}}%;" class="progress-bar progress-bar-success blue-sharp">
+                        <span class="sr-only">{{stats.etiEthDiff}}% eti/eth difficulty</span>
                     </span>
                 </div>
                 <div class="status">
                     <div class="status-title"> ETI/ETH difficulty </div>
-                    <div class="status-number"> {{stats.etcEthDiff}}% </div>
+                    <div class="status-number"> {{stats.etiEthDiff}}% </div>
                 </div>
             </div>
         </div>
