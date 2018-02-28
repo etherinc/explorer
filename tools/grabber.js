@@ -84,13 +84,6 @@ var grabBlock = function(web3, blockNumber) {
                     // then grab the parent block number (<this block's number> - 1). Otherwise done 
                     // with this interval object (or not currently working on an interval) 
                     // -> so move onto the next thing in the blocks array.
-//                     if(blockData['number'] > blockNumber) {
-//                         blockNumber = blockData['number'] + 1;
-//                         grabBlock(web3, blockNumber);
-//                     }
-//                     else {
-//                         grabBlock(web3, blockNumber);
-//                     }
                     grabBlock(web3, blockData['number'] + 1);
                 }
                 else {
