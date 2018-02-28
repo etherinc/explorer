@@ -225,7 +225,7 @@ var blockIter = function(web3, firstBlock, lastBlock) {
 /** On Startup **/
 // geth --rpc --rpcaddr "localhost" --rpcport "8545"  --rpcapi "eth,net,web3"
 // set the default geth port if it's not provided
-if ((typeof config.gethPort) !== 'number') {
+if ((typeof gethPort) !== 'number') {
     gethPort = 8545; // default
 }
 
