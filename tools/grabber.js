@@ -281,7 +281,16 @@ if (!('output' in config) || (typeof config.output) !== 'string') {
 // set the default blocks if it's not provided
 if (!('blocks' in config) || !(Array.isArray(config.blocks))) {
     config.blocks = [];
-    config.blocks.push({'start': 0, 'end': 'latest'});
+    var query = Block.find().sort({number:1}).limit(1);
+    query.exec(function (err, lastblock) { 
+        if(err) {
+            console.log('Error: ' + err);
+        } else {
+            
+            config.blocks = [ {"start": lastblock[0].number} ];
+            if(lastblock[0].number){ blockNo = lastblock[0].number; }
+        }
+    });
 }
 
 console.log('Using configuration:');
