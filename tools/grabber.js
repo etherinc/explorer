@@ -13,7 +13,7 @@ var Transaction     = mongoose.model( 'Transaction' );
 var RPC_HOST = process.env.RPC_HOST || "localhost";
 var gethPort = process.env.gethPort || 8545;
 var listenOnly = process.env.listenOnly || false;
-var startBlock = process.env.startBlockno || 0;
+var startBlockno = process.env.startBlockno || 0;
 var quiet = process.env.quiet || true;
 var terminateAtExistingDB = process.env.terminateAtExistingDB || false;
 var skipTransactions = process.env.skipTransactions || false;
@@ -235,11 +235,13 @@ query.exec(function (err, lastblock) {
     if(err) {
         console.log('Error: ' + err);
     } else {
+        let startBlock = startBlockno;
         if(lastblock.length && lastblock[0].number){ 
-            grabBlocks(lastblock[0].number + 1);
-        } else {
-            grabBlocks(startBlock);
+            if((lastblock[0].number + 1) > startBlock){
+                startBlock = lastblock[0].number + 1
+            }
         }
+        grabBlocks(startBlock);
     }
 });
 
