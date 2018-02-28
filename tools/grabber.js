@@ -19,20 +19,9 @@ var grabBlocks = function(config) {
     if('listenOnly' in config && config.listenOnly === true) 
         listenBlocks(config, web3);
     else
-        var query = Block.find().sort({number:1}).limit(1);
-        query.exec(function (err, lastblock) { 
-            if(err) {
-                console.log('Error: ' + err);
-            } else {
-                var blockNo = config.blocks.pop();
-                if(lastblock[0].number){ blockNo = lastblock[0].number; }
-
-                setTimeout(function() {
-                    grabBlock(config, web3, blockNo);
-                }, 2000);
-            }
-        });
-
+        setTimeout(function() {
+            grabBlock(config, web3, blockNo);
+        }, 2000);
 }
 
 var listenBlocks = function(config, web3) {
@@ -59,8 +48,8 @@ var grabBlock = function(config, web3, blockHashOrNumber) {
     }
 
     if (typeof blockHashOrNumber === 'object') {
-        if('start' in blockHashOrNumber && 'end' in blockHashOrNumber) {
-            desiredBlockHashOrNumber = blockHashOrNumber.end;
+        if('start' in blockHashOrNumber) {
+            desiredBlockHashOrNumber = blockHashOrNumber.start;
         }
         else {
             console.log('Error: Aborted becasue found a interval in blocks ' +
@@ -107,7 +96,7 @@ var grabBlock = function(config, web3, blockHashOrNumber) {
                             (typeof blockHashOrNumber['start'] === 'number' && blockData['number'] > blockHashOrNumber['start'])
                         )
                     ) {
-                        blockHashOrNumber['end'] = blockData['number'] + 1;
+                        blockHashOrNumber['start'] = blockData['number'] + 1;
                         grabBlock(config, web3, blockHashOrNumber);
                     }
                     else {
@@ -256,6 +245,17 @@ var config = {};
 try {
     var configContents = fs.readFileSync('config.json');
     config = JSON.parse(configContents);
+    
+    var query = Block.find().sort({number:1}).limit(1);
+    query.exec(function (err, lastblock) { 
+        if(err) {
+            console.log('Error: ' + err);
+        } else {
+            
+            config.blocks = [ {"start": lastblock[0].number} ];
+            if(lastblock[0].number){ blockNo = lastblock[0].number; }
+        }
+    });
 }
 catch (error) {
     if (error.code === 'ENOENT') {
