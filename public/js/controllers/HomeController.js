@@ -57,12 +57,12 @@ angular.module('BlocksApp').controller('HomeController', function($rootScope, $s
       
       $http.post(etcEthURL, {"action": "etceth"})
        .then(function(res){
-          scope.stats.etcHashrate = res.data.etcHashrate;
+          scope.stats.etiHashrate = res.data.etcHashrate;
           scope.stats.ethHashrate = res.data.ethHashrate;
-          scope.stats.etcEthHash = res.data.etcEthHash;
+          scope.stats.etiEthHash = res.data.etcEthHash;
           scope.stats.ethDiff = res.data.ethDiff;
-          scope.stats.etcDiff = res.data.etcDiff;
-          scope.stats.etcEthDiff = res.data.etcEthDiff;
+          scope.stats.etiDiff = res.data.etcDiff;
+          scope.stats.etiEthDiff = res.data.etcEthDiff;
         });
       $http.get(etiPriceURL)
        .then(function(res){
