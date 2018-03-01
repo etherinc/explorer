@@ -46,7 +46,7 @@ var listtxns = function(req, res){
   var data = {};
   txnlistFind.exec("find", function (err, docs) {
     if (docs)
-      data = docs;
+      data.result = docs;
     res.write(JSON.stringify(data));
     res.end();
   });
