@@ -37,14 +37,27 @@ module.exports = function(app){
   app.post('/stats', stats);
   
   app.post('/listtxn', listtxns);
+  app.post('/lastblock', lastblock);
 }
 
 var listtxns = function(req, res){
   var addr = req.body.addr.toLowerCase();
   var blockNumber = parseInt(req.body.blockNumber);
-  var txnlistFind = Transaction.find( { $and : [ {"to": addr}, { "blockNumber" : blockNumber } ] })  
+  var txnlistFind = Transaction.find({ $and : [ {"to": addr}, { "blockNumber" : blockNumber } ] })  
   var data = {};
   txnlistFind.exec("find", function (err, docs) {
+    if (docs)
+      data.result = docs;
+    res.write(JSON.stringify(data));
+    res.end();
+  });
+};
+
+var lastblock = function(req, res){
+  var addr = req.body.addr.toLowerCase();
+  var txnlistFind = Transaction.find({"to": addr})  
+  var data = {};
+  txnlistFind.sort('-blockNumber').limit(1).exec("find", function (err, docs) {
     if (docs)
       data.result = docs;
     res.write(JSON.stringify(data));
