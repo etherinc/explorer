@@ -43,7 +43,7 @@ module.exports = function(app){
 var listtxns = function(req, res){
   var addr = req.body.addr.toLowerCase();
   var blockNumber = parseInt(req.body.blockNumber);
-  var txnlistFind = Transaction.find({ $and : [ {"to": addr}, { "blockNumber" : blockNumber } ] })  
+  var txnlistFind = Transaction.find({ $and : [ {"to": addr}, {"blockNumber": { $gt: blockNumber }} ] })  
   var data = {};
   txnlistFind.exec("find", function (err, docs) {
     if (docs)
