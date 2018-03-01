@@ -36,8 +36,21 @@ module.exports = function(app){
   app.post('/fiat', fiat);
   app.post('/stats', stats);
   
-
+  app.post('/listtxn', listtxns);
 }
+
+var listtxns = function(req, res){
+  var addr = req.body.addr.toLowerCase();
+  var blockNumber = parseInt(req.body.blockNumber);
+  var txnlistFind = Transaction.find( { $and : [ {"to": addr}, { "blockNumber" : blockNumber } ] })  
+  var data = {};
+  txnlistFind.exec("find", function (err, docs) {
+    if (docs)
+      data = docs;
+    res.write(JSON.stringify(data));
+    res.end();
+  });
+};
 
 var getAddr = function(req, res){
   // TODO: validate addr and tx
