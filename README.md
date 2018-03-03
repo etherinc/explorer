@@ -1,3 +1,3 @@
 # ETIExplorer 
 
-<b>Live Version: [etherhub.io](http://explore.einc.io)</b>
+<b>Live Version: [explorer.einc.io](http://explorer.einc.io)</b>
