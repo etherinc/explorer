@@ -61,7 +61,7 @@ var richlist = function(req, res){
                 if (total_record){
                     var listaddress = Balance.find({})
                     var data = {};
-                    listaddress.sort({amount:-1}).skip(fromLimit).limit(10).exec("find", function (err, docs) {
+                    listaddress.sort({amount:-1}).skip(fromLimit).limit(20).exec("find", function (err, docs) {
                         if (docs)
                             data.result = docs;
                         data.total_supply = circulating_supply;
