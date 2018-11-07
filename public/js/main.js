@@ -112,6 +112,28 @@ BlocksApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvide
                 }]
             }
         })
+        
+        .state('richlist', {
+            url: "/richlist",
+            templateUrl: "views/richlist.html",            
+            data: {pageTitle: 'Blockchain Explorer'},
+            controller: "RichListController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        name: 'BlocksApp',
+                        insertBefore: '#ng_load_plugins_before', 
+                        files: [
+                            '/js/controllers/RichListController.js',
+                            '/css/todo-2.min.css',
+                            '/plugins/datatables/datatables.min.css',
+                            '/plugins/datatables/datatables.bootstrap.css',
+                            '/plugins/datatables/datatables.all.min.js',
+                            '/plugins/datatables/datatable.min.js'
+                        ]}]);
+                }]
+            }
+        })
 
         .state('address', {
             url: "/addr/{hash}",
