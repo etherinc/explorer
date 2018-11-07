@@ -195,7 +195,7 @@ var writeBalanceToDB = function(addData) {
         addData.forEach(function(addr){
             var balance = 0;
             if(web3_js.isConnected()) {
-                balance = web3_js.fromWei(web3_js.toDecimal(web3_js.eth.getBalance(addr)), 'ether');
+                balance = Number(web3_js.fromWei(web3_js.toDecimal(web3_js.eth.getBalance(addr)), 'ether'));
             }
             
             var insert_data = {"address": addr, "amount": balance};
