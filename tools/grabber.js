@@ -221,24 +221,25 @@ var writeBalanceToDB = function(addData) {
                     });
                     
                 } else {
-                    
-                    // insert new address
-                    Balance.collection.insert(insert_data, function( err, tx ){
-                        if ( typeof err !== 'undefined' && err ) {
-                            if (err.code == 11000) {
-                                console.log('Skip: Duplicate key ' + 
-                                err);
-                            } else {
-                              console.log('Error: Aborted due to error: ' + 
+                    if(balance > 0){
+                        // insert new address
+                        Balance.collection.insert(insert_data, function( err, tx ){
+                            if ( typeof err !== 'undefined' && err ) {
+                                if (err.code == 11000) {
+                                    console.log('Skip: Duplicate key ' + 
                                     err);
-                              process.exit(9);
-                          }
-                        } else if(quiet === false) {
-                            console.log('DB successfully written for balance ' +
-                                addr );
-                            
-                        }
-                    });
+                                } else {
+                                  console.log('Error: Aborted due to error: ' + 
+                                        err);
+                                  process.exit(9);
+                              }
+                            } else if(quiet === false) {
+                                console.log('DB successfully written for balance ' +
+                                    addr );
+
+                            }
+                        });
+                    }
                 }
             });
         });
