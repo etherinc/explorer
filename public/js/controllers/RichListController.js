@@ -49,6 +49,8 @@ angular.module('BlocksApp').controller('RichListController', function($rootScope
         var el =angular.element('#ldrlistbtn');
         el.attr('data-form-id');
         
+        angular.element('#richlist-cont').html('');
+        
         var nvl = parseInt(el.attr('data-form-id')) + 20;
         $scope.reloadRichlist(nvl); 
     }
