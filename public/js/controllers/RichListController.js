@@ -6,7 +6,7 @@ angular.module('BlocksApp').controller('RichListController', function($rootScope
 
     var URL = '/richlist';
     
-    $scope.reloadRichlist = function(no) {
+    $scope.loadRichlist = function(no) {
       $scope.txLoading = true;
       $http({
         method: 'POST',
@@ -49,12 +49,17 @@ angular.module('BlocksApp').controller('RichListController', function($rootScope
         var el =angular.element('#ldrlistbtn');
         el.attr('data-form-id');
         
-        angular.element('#richlist-cont').html('');
-        
         var nvl = parseInt(el.attr('data-form-id')) + 20;
-        $scope.reloadRichlist(nvl); 
+        $scope.loadRichlist(nvl); 
     }
     
-    $scope.reloadRichlist(0);
+    
+    $scope.reloadRichlist = function() {
+        angular.element('#richlist-cont').html('');
+        
+        $scope.loadRichlist(0);
+    }
+    
+    $scope.loadRichlist(0);
 });
 
