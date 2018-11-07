@@ -51,12 +51,20 @@ var Transaction = new Schema(
     "input": String
 });
 
+var Balance = new Schema(
+{
+    "address": {type: String, index: {unique: true}},
+    "amount": Number
+});
+
 mongoose.model('Block', Block);
 mongoose.model('Contract', Contract);
 mongoose.model('Transaction', Transaction);
+mongoose.model('Balance', Balance);
 module.exports.Block = mongoose.model('Block');
 module.exports.Contract = mongoose.model('Contract');
 module.exports.Transaction = mongoose.model('Transaction');
+module.exports.Balance = mongoose.model('Balance');
 
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/blockDB');
 mongoose.set('debug', true);
