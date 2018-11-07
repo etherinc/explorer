@@ -2,6 +2,7 @@ var mongoose = require( 'mongoose' );
 
 var Block     = mongoose.model( 'Block' );
 var Transaction = mongoose.model( 'Transaction' );
+var Balance = mongoose.model( 'Balance' );
 var filters = require('./filters')
 
 
@@ -38,7 +39,52 @@ module.exports = function(app){
   
   app.post('/listtxn', listtxns);
   app.post('/lastblock', lastblock);
+  
+  
+  app.post('/richlist', richlist);
 }
+
+var richlist = function(req, res){
+    var fromLimit = parseInt(req.body.count);
+    
+    Block.find({}).sort({number:-1}).limit(1).exec("find", function (err2, total_blocks) {
+        if (total_blocks){
+            var all_blocks = total_blocks[0].number;
+            var block_reward = 3;
+            var circulating_supply = 0;
+            
+            circulating_supply = all_blocks * block_reward;
+            circulating_supply = circulating_supply + 205131818; //   coinsale
+            circulating_supply = circulating_supply + 97528142; //   ethereum fork reward
+    
+            Balance.find({}).exec("count", function (err1, total_record) {
+                if (total_record){
+                    var listaddress = Balance.find({})
+                    var data = {};
+                    listaddress.sort({amount:-1}).skip(fromLimit).limit(10).exec("find", function (err, docs) {
+                        if (docs)
+                            data.result = docs;
+                        data.total_supply = circulating_supply;
+                        data.total = total_record * 50;
+                        res.write(JSON.stringify(data));
+                        res.end();
+                    });
+                }
+            });
+        }
+    });
+    
+    
+//   var listaddress = Balance.find({})
+//   var data = {};
+//   listaddress.sort({amount:-1}).limit(10).exec("find", function (err, docs) {
+//     if (docs)
+//       docs.supply = 10;
+//       data.result = docs;
+//     res.write(JSON.stringify(data));
+//     res.end();
+//   });
+};
 
 var listtxns = function(req, res){
   var addr = req.body.addr.toLowerCase();
@@ -85,7 +131,7 @@ var getAddr = function(req, res){
               data.data = [];
             res.write(JSON.stringify(data));
             res.end();
-          });
+    });
 
 };
  
@@ -204,4 +250,5 @@ const DATA_ACTIONS = {
   "latest_blocks": sendBlocks,
   "latest_txs": sendTxs
 }
+
 
